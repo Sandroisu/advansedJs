@@ -1,0 +1,27 @@
+.btn-cart {
+    background-color: #4CAF50;
+    border-radius: 4px;
+    color: white;
+    border: none;
+    padding: 16px;
+}
+
+.products {
+    margin: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.product-item {
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.buy-btn {
+    background-color: #f44336;
+    border-radius: 4px;
+    color: white;
+    border: none;
+    padding: 16px;
+}
