@@ -1,0 +1,49 @@
+.humbs-list {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.humb-item {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    padding: 4px;
+    align-items: center;
+    box-shadow: 1px 2px 3px 4px rgba(190, 186, 186, 0.4);
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.humb-adj {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+}
+
+.humb-inner-adj {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.humb-img {
+    width: 100px;
+    height: 100px;
+}
+
+
+.humb-img img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.total-price {
+    color: red;
+}
+
+.total-calories {
+    color: rgb(33, 102, 59);
+}
