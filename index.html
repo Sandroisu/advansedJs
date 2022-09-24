@@ -1,19 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <title>Интернет-магазин</title>
-    </head>
-
-    <body>
-        <header>
-            <button class="btn-cart" type="button">Корзина</button>
-        </header>
-        <main>
-            <div class="products"></div>
-        </main>
-        <script src="js/main.js"></script>
-    </body>
-
-</html>
+<div id="app">
+    <h1>Привет, {{name}}!!!</h1>
+    <a :href="link">Перейти в поисковик</a>
+    <button @click="counter++">Ok{{counter}}</button>
+    <h2>{{hello()}}</h2>
+    <div>
+        <h2 v-if="show">
+            Text is visible
+        </h2>
+        <h2 v-else>
+            Text is not visible
+        </h2>
+        <button @click="show=!show">Поменять</button>
+    </div>
+    <p>{{counter>10 ? 'Больше 10' : 'Меньше 10'}}</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            name: 'Иван',
+            link: 'https://google.com',
+            counter: 0,
+            show: false
+        }
+        ,
+        methods: {
+            hello() {
+                return `${this.name}, добрый день!`
+            }
+        }
+    });
+</script>
