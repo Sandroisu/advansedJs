@@ -1,34 +1,47 @@
-<div id="app">
-    <h1>Привет, {{name}}!!!</h1>
-    <a :href="link">Перейти в поисковик</a>
-    <button @click="counter++">Ok{{counter}}</button>
-    <h2>{{hello()}}</h2>
-    <div>
-        <h2 v-if="show">
-            Text is visible
-        </h2>
-        <h2 v-else>
-            Text is not visible
-        </h2>
-        <button @click="show=!show">Поменять</button>
-    </div>
-    <p>{{counter>10 ? 'Больше 10' : 'Меньше 10'}}</p>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
-<script>
-    const app = new Vue({
-        el: '#app',
-        data: {
-            name: 'Иван',
-            link: 'https://google.com',
-            counter: 0,
-            show: false
-        }
-        ,
-        methods: {
-            hello() {
-                return `${this.name}, добрый день!`
-            }
-        }
-    });
-</script>
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>E-shop</title>
+    </head>
+
+    <body>
+        <div id="app">
+            <header>
+                <div class="logo">E-shop</div>
+                <div class="cart">
+                    <form action="#" class="search-form">
+                        <input type="text" class="search-field" v-model="userSearch">
+                        <button class="btn-search" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                    <button class="btn-cart" type="button">Корзина</button>
+                    <div class="cart-block invisible"></div>
+                </div>
+            </header>
+            <main>
+                <div class="products">
+                    <div class="prodict-item" v-for="product of products" :key="product.id_product">
+                        <img :src="imgCatalog" alt="img not available">
+                        <div class="desc">
+                            <h3>{{product.product_name}}</h3>
+                            <p>{{product.product_price}} $</p>
+                            <button class="buy-btn" @click="addProduct(product)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
+        <script src="js/main.js"></script>
+    </body>
+
+</html>
