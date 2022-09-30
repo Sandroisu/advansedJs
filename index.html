@@ -17,19 +17,30 @@
             <header>
                 <div class="logo">E-shop</div>
                 <div class="cart">
-                    <form action="#" class="search-form">
-                        <input type="text" class="search-field" v-model="userSearch">
+                    <form action="#" class="search-form" @submit-prevent="filter">
+                        <input type="text" class="search-field" v-model="userSearch" @input="filter()">
                         <button class="btn-search" type="submit">
                             <i class="fa fa-search"></i>
                         </button>
                     </form>
-                    <button class="btn-cart" type="button">Корзина</button>
-                    <div class="cart-block invisible"></div>
-                </div>
+                    <button @click="show = !show" class="btn-cart" type="button">Корзина</button>
+                    <div class="cart-block" v-show="show">
+                        <div class="cart-item" v-for="item of cartItems" :key="item.id_product">
+                            <div class="product-bio">
+                                <img :src="imgCart" alt="some img">
+                                <div class="product-desc">
+                                    <div class="product-title">{{item.product_name}}</div>
+                                    <div class="product-quantity">{{item.quantity}}</div>
+                                    <div class="product-single-price">{{item.price}}</div>
+                                    <div class="product-total-price">Total price: {{item.price*item.quantity}}$</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </header>
             <main>
                 <div class="products">
-                    <div class="prodict-item" v-for="product of products" :key="product.id_product">
+                    <div class="product-item" v-for="product of filtered" :key="product.id_product">
                         <img :src="imgCatalog" alt="img not available">
                         <div class="desc">
                             <h3>{{product.product_name}}</h3>

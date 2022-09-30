@@ -6,11 +6,14 @@ const app = new Vue({
         catalogUrl: 'catalogData.json',
         products: [],
         filtered: [],
+        cartItems: [],
         imgCatalog: 'https://via.placeholder.com/200x150',
+        imgCart: 'https://via.placeholder.com/50x100',
         userSearch: '',
         show: false
     },
     methods: {
+
         filter() {
             const regexp = new RegExp(this.userSearch, 'i');
             this.filtered = this.products.filter(product => regexp.test(product.product_name));
@@ -23,15 +26,14 @@ const app = new Vue({
                 });
         },
         addProduct(item) {
-            const find = this.cart.find(product => item.id == product.id);
+            const find = this.cartItems.find(product => item.id == product.id);
             if (find) {
                 find.quantity++;
             } else {
-                //this.$set(item, 'quantity', 1);
                 const n = Object.assign({ quantity: 1 }, item);
-                this.cart.push(n);
+                this.cartItems.push(n);
             }
-            console.log(this.cart);
+            console.log(this.cartItems);
         }
     },
     mounted() {
@@ -39,6 +41,7 @@ const app = new Vue({
             .then(data => {
                 for (let element of data) {
                     this.products.push(element)
+                    this.filtered.push(element)
                 }
             });
         this.getJson(`getProducts.json`)
