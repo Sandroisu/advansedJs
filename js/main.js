@@ -3,14 +3,17 @@ const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-a
 const app = new Vue({
     el: '#app',
     data: {
-        catalogUrl: 'catalogData.json',
+        userSearch: '',
+        showCart: false,
+        catalogUrl: '/catalogData.json',
+        cartUrl: '/getBasket.json',
         products: [],
         filtered: [],
         cartItems: [],
-        imgCatalog: 'https://via.placeholder.com/200x150',
+        imgProduct: 'https://via.placeholder.com/200x150',
         imgCart: 'https://via.placeholder.com/50x100',
-        userSearch: '',
-        show: false
+        error: false
+
     },
     methods: {
 
@@ -22,18 +25,38 @@ const app = new Vue({
             return fetch(url)
                 .then(result => result.json())
                 .catch(error => {
-                    console.log(error)
+                    console.log(error);
+                    this.error = true;
                 });
         },
         addProduct(item) {
-            const find = this.cartItems.find(product => item.id == product.id);
-            if (find) {
-                find.quantity++;
-            } else {
-                const n = Object.assign({ quantity: 1 }, item);
-                this.cartItems.push(n);
-            }
-            console.log(this.cartItems);
+            this.getJson(`${API}/addToBasket.json`)
+                .then(data => {
+                    if (data.result !== 1) {
+                        return;
+                    }
+                    const itemId = item.id_product;
+                    const find = this.cartItems.find(product => itemId === product.id_product);
+                    if (find) {
+                        find.quantity++;
+                    } else {
+                        const newCartItem = Object.assign({ quantity: 1 }, item);
+                        this.cartItems.push(newCartItem);
+                    }
+                });
+        },
+        remove(item) {
+            this.getJson(`${API}/addToBasket.json`)
+                .then(data => {
+                    if (data.result !== 1) {
+                        return;
+                    }
+                    if (item.quantity > 1) {
+                        item.quantity--;
+                    } else {
+                        this.cartItems.splice(this.cartItems.indexOf(item), 1);
+                    }
+                });
         }
     },
     mounted() {
