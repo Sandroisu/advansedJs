@@ -3,17 +3,37 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Интернет-магазин</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>E-shop</title>
     </head>
 
     <body>
-        <header>
-            <button class="btn-cart" type="button">Корзина</button>
-        </header>
-        <main>
-            <div class="products"></div>
-        </main>
+        <div id="app">
+            <header>
+                <div class="logo">E-shop</div>
+                <div class="cart">
+                    <search></search>
+                    <button @click="showCart = !showCart" class="btn-cart" type="button">Корзина</button>
+
+                    <cart :cart-items="cartItems" :img="imgCart" :visibility="showCart"></cart>
+            </header>
+            <main>
+                <attention></attention>
+                <products :products="filtered" :img="imgProduct" @add-product="addProduct"></products>
+            </main>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="js/ProductComponent.js"></script>
+        <script src="js/CartComponent.js"></script>
+        <script src="js/FilterComponent.js"></script>
+        <script src="js/ErrorComponent.js"></script>
         <script src="js/main.js"></script>
+
     </body>
 
 </html>
